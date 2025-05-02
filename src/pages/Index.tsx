@@ -1,13 +1,60 @@
-// Update this page (the content is just a fallback if you fail to update the page)
 
-const Index = () => {
+import React, { useEffect } from 'react';
+import Navbar from '../components/Navbar';
+import Hero from '../components/Hero';
+import About from '../components/About';
+import Services from '../components/Services';
+import Booking from '../components/Booking';
+import Gallery from '../components/Gallery';
+import Contact from '../components/Contact';
+import Footer from '../components/Footer';
+import WhatsAppButton from '../components/WhatsAppButton';
+import { LanguageProvider } from '../contexts/LanguageContext';
+import { DatabaseProvider } from '../contexts/DatabaseContext';
+
+const Index: React.FC = () => {
+  // Animation on scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      
+      elements.forEach((element) => {
+        const position = element.getBoundingClientRect();
+        
+        // Check if element is in viewport
+        if (position.top < window.innerHeight - 100) {
+          element.classList.add('visible');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    // Initial check
+    handleScroll();
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <LanguageProvider>
+      <DatabaseProvider>
+        <div className="min-h-screen">
+          <Navbar />
+          <main>
+            <Hero />
+            <About />
+            <Services />
+            <Booking />
+            <Gallery />
+            <Contact />
+          </main>
+          <Footer />
+          <WhatsAppButton />
+        </div>
+      </DatabaseProvider>
+    </LanguageProvider>
   );
 };
 
