@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Booking: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [showBooksy, setShowBooksy] = useState(true);
 
   return (
