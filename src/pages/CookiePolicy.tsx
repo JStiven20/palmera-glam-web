@@ -1,10 +1,10 @@
 
 import React from 'react';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage, LanguageProvider } from '../contexts/LanguageContext';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
-const CookiePolicy: React.FC = () => {
+const CookiePolicyContent: React.FC = () => {
   const { language } = useLanguage();
   
   return (
@@ -99,6 +99,14 @@ const CookiePolicy: React.FC = () => {
       </div>
       <Footer />
     </>
+  );
+};
+
+const CookiePolicy: React.FC = () => {
+  return (
+    <LanguageProvider>
+      <CookiePolicyContent />
+    </LanguageProvider>
   );
 };
 

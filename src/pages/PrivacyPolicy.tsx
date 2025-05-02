@@ -1,10 +1,10 @@
 
 import React from 'react';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage, LanguageProvider } from '../contexts/LanguageContext';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
-const PrivacyPolicy: React.FC = () => {
+const PrivacyPolicyContent: React.FC = () => {
   const { language } = useLanguage();
   
   return (
@@ -125,6 +125,14 @@ const PrivacyPolicy: React.FC = () => {
       </div>
       <Footer />
     </>
+  );
+};
+
+const PrivacyPolicy: React.FC = () => {
+  return (
+    <LanguageProvider>
+      <PrivacyPolicyContent />
+    </LanguageProvider>
   );
 };
 
