@@ -22,6 +22,12 @@ const CookieConsent: React.FC = () => {
   const acceptCookies = () => {
     localStorage.setItem('cookie-consent', 'accepted');
     setShowConsent(false);
+    
+    // Initialize Meta Pixel after accepting cookies
+    if (typeof window !== 'undefined') {
+      // This will trigger the Meta Pixel initialization in App.tsx
+      window.location.reload();
+    }
   };
 
   const declineCookies = () => {
