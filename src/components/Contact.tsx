@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useDatabase } from '../contexts/DatabaseContext';
 import { toast } from '@/hooks/use-toast';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const Contact: React.FC = () => {
   const { t, language } = useLanguage();
@@ -15,6 +16,7 @@ const Contact: React.FC = () => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [captchaValue, setCaptchaValue] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -24,17 +26,60 @@ const Contact: React.FC = () => {
     }));
   };
 
+  const handleCaptchaChange = (value: string | null) => {
+    setCaptchaValue(value);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!captchaValue) {
+      toast({
+        title: language === 'es' ? 'Error' : 'Error',
+        description: language === 'es' 
+          ? 'Por favor, verifica que no eres un robot.' 
+          : 'Please verify that you are not a robot.',
+        variant: 'destructive',
+        duration: 3000,
+      });
+      return;
+    }
+    
     setIsSubmitting(true);
     
-    // Simulate form submission
+    // Basic validation and sanitization
+    const sanitizedData = {
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
+      message: formData.message.trim()
+    };
+    
+    // Check for basic XSS patterns
+    const hasXSS = Object.values(sanitizedData).some(val => 
+      /<script|javascript:|onerror=|onload=|eval\(|setTimeout\(/i.test(val)
+    );
+    
+    if (hasXSS) {
+      toast({
+        title: language === 'es' ? 'Error de validación' : 'Validation Error',
+        description: language === 'es' 
+          ? 'Los datos enviados contienen caracteres no permitidos.' 
+          : 'Submitted data contains disallowed characters.',
+        variant: 'destructive',
+        duration: 3000,
+      });
+      setIsSubmitting(false);
+      return;
+    }
+    
+    // Simulate form submission with security validation
     setTimeout(() => {
       // Add client to database
       addClient({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone
+        name: sanitizedData.name,
+        email: sanitizedData.email,
+        phone: sanitizedData.phone
       });
       
       // Show success message
@@ -46,13 +91,19 @@ const Contact: React.FC = () => {
         duration: 5000,
       });
       
-      // Reset form
+      // Reset form and captcha
       setFormData({
         name: '',
         email: '',
         phone: '',
         message: ''
       });
+      setCaptchaValue(null);
+      
+      // @ts-ignore - Reset the reCAPTCHA
+      if (window.grecaptcha) {
+        window.grecaptcha.reset();
+      }
       
       setIsSubmitting(false);
     }, 1000);
@@ -107,6 +158,7 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-palmera-olive"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                 />
               </div>
               
@@ -140,11 +192,45 @@ const Contact: React.FC = () => {
                 ></textarea>
               </div>
               
+              <div className="mb-6">
+                <ReCAPTCHA
+                  sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" // This is Google's test key for development
+                  onChange={handleCaptchaChange}
+                />
+                <p className="text-xs text-gray-500 mt-2">
+                  {language === 'es' 
+                    ? 'Este sitio está protegido por reCAPTCHA y se aplican la Política de Privacidad y los Términos de Servicio de Google.' 
+                    : 'This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.'}
+                </p>
+              </div>
+              
+              <div className="mb-4">
+                <label className="flex items-start">
+                  <input
+                    type="checkbox"
+                    required
+                    className="mt-1"
+                  />
+                  <span className="ml-2 text-sm text-gray-600">
+                    {language === 'es' 
+                      ? 'He leído y acepto la ' 
+                      : 'I have read and agree to the '}
+                    <a href="/privacy-policy" className="text-palmera-olive hover:underline">
+                      {language === 'es' ? 'política de privacidad' : 'privacy policy'}
+                    </a>
+                    {language === 'es' ? ' y ' : ' and '}
+                    <a href="/cookie-policy" className="text-palmera-olive hover:underline">
+                      {language === 'es' ? 'política de cookies' : 'cookie policy'}
+                    </a>.
+                  </span>
+                </label>
+              </div>
+              
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !captchaValue}
                 className={`w-full bg-palmera-olive text-white py-3 px-4 rounded hover:bg-opacity-90 transition-colors ${
-                  isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+                  isSubmitting || !captchaValue ? 'opacity-70 cursor-not-allowed' : ''
                 }`}
               >
                 {isSubmitting ? (

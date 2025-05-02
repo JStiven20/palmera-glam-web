@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   const { t, language } = useLanguage();
@@ -20,19 +21,19 @@ const Footer: React.FC = () => {
               {t('about.mission')}
             </p>
             <div className="flex space-x-4">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-400 hover:text-white transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
               </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-400 hover:text-white transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                 </svg>
               </a>
-              <a href="https://whatsapp.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+              <a href="https://whatsapp.com" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-gray-400 hover:text-white transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"></path>
                   <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1zm0 0a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"></path>
@@ -81,12 +82,35 @@ const Footer: React.FC = () => {
           {/* Newsletter */}
           <div>
             <h3 className="text-xl font-playfair mb-4">{t('footer.subscribe')}</h3>
-            <form className="flex">
+            <form className="flex" onSubmit={(e) => {
+              e.preventDefault();
+              const email = (e.currentTarget.elements.namedItem('email') as HTMLInputElement).value;
+              
+              // Basic validation
+              if (email && email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                toast({
+                  title: language === 'es' ? '¡Suscrito!' : 'Subscribed!',
+                  description: language === 'es' 
+                    ? 'Gracias por suscribirte a nuestro boletín.' 
+                    : 'Thank you for subscribing to our newsletter.',
+                  duration: 5000,
+                });
+                
+                // Reset form
+                (e.currentTarget.elements.namedItem('email') as HTMLInputElement).value = '';
+                
+                // Track lead event (uncomment when Meta Pixel is set up)
+                // import { trackLead } from '../utils/metaEvents';
+                // trackLead('newsletter', 'footer');
+              }
+            }}>
               <input
                 type="email"
+                name="email"
                 placeholder="Email"
                 className="bg-gray-800 text-white px-4 py-2 rounded-l w-full focus:outline-none"
                 required
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
               />
               <button
                 type="submit"
@@ -107,13 +131,16 @@ const Footer: React.FC = () => {
           <p className="text-gray-400 text-sm">
             &copy; {currentYear} Palmera Estudio. {t('footer.rights')}.
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-gray-400 hover:text-white text-sm">
+          <div className="flex flex-wrap space-x-6 mt-4 md:mt-0">
+            <Link to="/privacy-policy" className="text-gray-400 hover:text-white text-sm whitespace-nowrap">
               {t('footer.privacy')}
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white text-sm">
+            </Link>
+            <Link to="/cookie-policy" className="text-gray-400 hover:text-white text-sm whitespace-nowrap">
               {t('footer.terms')}
-            </a>
+            </Link>
+            <Link to="/cookie-policy" className="text-gray-400 hover:text-white text-sm whitespace-nowrap">
+              {language === 'es' ? 'Política de cookies' : 'Cookie Policy'}
+            </Link>
           </div>
         </div>
       </div>
