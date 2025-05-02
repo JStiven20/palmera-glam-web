@@ -2,6 +2,7 @@
 import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Link } from 'react-router-dom';
+import { toast } from '@/hooks/use-toast';
 
 const Footer: React.FC = () => {
   const { t, language } = useLanguage();
