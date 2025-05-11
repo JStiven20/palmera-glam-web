@@ -66,6 +66,7 @@ const ContactInfo = () => {
           style={{ border: 0, borderRadius: '0.5rem' }}
           allowFullScreen
           loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
           title={language === 'es' ? 'Mapa de ubicación de Palmera Estudio' : 'Map location of Palmera Estudio'}
         ></iframe>
       </div>
