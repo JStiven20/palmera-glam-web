@@ -12,11 +12,11 @@ const Hero: React.FC = () => {
     >
       <div className="absolute inset-0 bg-black bg-opacity-30 z-10"></div>
       
-      {/* Hero Background Image */}
+      {/* Hero Background Image - Optimized with WebP */}
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{ 
-          backgroundImage: "url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158')", 
+          backgroundImage: "url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&w=1200&q=75&fm=webp')", 
         }}
       ></div>
       

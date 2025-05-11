@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -6,31 +5,43 @@ const Gallery: React.FC = () => {
   const { t } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Gallery images - in a real implementation, these would be from your actual gallery
+  // Gallery images - updated to WebP format with proper sizing
   const images = [
     {
-      src: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7',
+      src: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&w=800&q=75&fm=webp',
       alt: 'Nail design example 1',
+      width: 800,
+      height: 600,
     },
     {
-      src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158',
+      src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&w=800&q=75&fm=webp',
       alt: 'Nail design example 2',
+      width: 800,
+      height: 600,
     },
     {
-      src: 'https://images.unsplash.com/photo-1721322800607-8c38375eef04',
+      src: 'https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&w=800&q=75&fm=webp',
       alt: 'Nail design example 3',
+      width: 800,
+      height: 600,
     },
     {
-      src: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7',
+      src: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&w=800&q=75&fm=webp',
       alt: 'Nail design example 4',
+      width: 800,
+      height: 600,
     },
     {
-      src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158',
+      src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&w=800&q=75&fm=webp',
       alt: 'Nail design example 5',
+      width: 800,
+      height: 600,
     },
     {
-      src: 'https://images.unsplash.com/photo-1721322800607-8c38375eef04',
+      src: 'https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&w=800&q=75&fm=webp',
       alt: 'Nail design example 6',
+      width: 800,
+      height: 600,
     }
   ];
 
@@ -69,7 +80,10 @@ const Gallery: React.FC = () => {
                   <img
                     src={image.src}
                     alt={image.alt}
+                    width={image.width}
+                    height={image.height}
                     className="w-full h-full object-cover"
+                    loading={index === 0 ? "eager" : "lazy"}
                   />
                 </div>
               ))}
@@ -111,25 +125,28 @@ const Gallery: React.FC = () => {
               />
             ))}
           </div>
-        </div>
 
-        {/* Thumbnail Grid */}
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mt-8">
-          {images.map((image, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`overflow-hidden rounded-md focus:outline-none transition-all duration-300 ${
-                activeIndex === index ? 'ring-2 ring-palmera-olive' : ''
-              }`}
-            >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-24 object-cover"
-              />
-            </button>
-          ))}
+          {/* Thumbnail Grid - updated with width and height attributes */}
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mt-8">
+            {images.map((image, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`overflow-hidden rounded-md focus:outline-none transition-all duration-300 ${
+                  activeIndex === index ? 'ring-2 ring-palmera-olive' : ''
+                }`}
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  width={200}
+                  height={150}
+                  loading="lazy"
+                  className="w-full h-24 object-cover"
+                />
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>
