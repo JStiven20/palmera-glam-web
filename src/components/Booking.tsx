@@ -123,10 +123,10 @@ const Booking: React.FC = () => {
                 {/* Placeholder for Booksy iframe */}
                 <div className="booking-iframe flex items-center justify-center bg-gray-100 p-10 text-center">
                   <div>
-                    <p className="text-lg mb-4">Booksy integration placeholder</p>
-                    <p className="text-gray-500 mb-6">This would be replaced with the actual Booksy booking widget iframe</p>
+                    <p className="text-lg mb-4"></p>
+                    <p className="text-gray-500 mb-6"></p>
                     <a 
-                      href="https://booksy.com" 
+                      href="https://booksy.com/es-es/98089_tamar-rivera-nails_salon-de-unas_48863_barcelona?do=invite&_branch_match_id=1471238438340173835&utm_medium=profile_share_from_profile&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXT07J0UvKz88urtRLzs%2FVz8ywKC0pKwoN802yrytKTUstKsrMS49PKsovL04tsnXOKMrPTQUA1ZJaCzwAAAA%3D" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="inline-block bg-palmera-olive text-white px-6 py-2 rounded"

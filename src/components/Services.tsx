@@ -33,7 +33,7 @@ const Services: React.FC = () => {
         es: 'Cuidado completo de uñas con tratamiento de cutículas, moldeado y esmalte.'
       },
       price: 25,
-      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158',
+      image: 'public/images/service1.jpg',
       category: 'manicure',
       duration: '30min'
     },
@@ -47,10 +47,10 @@ const Services: React.FC = () => {
         en: 'Relaxing foot treatment including soak, exfoliation, and polish.',
         es: 'Tratamiento relajante para pies que incluye remojo, exfoliación y esmalte.'
       },
-      price: 35,
-      image: 'https://images.unsplash.com/photo-1721322800607-8c38375eef04',
-      category: 'pedicure',
-      duration: '40min'
+      price: 50,
+      image: 'public/images/service2.jpg',
+      category: 'pedicure complet',
+      duration: '1h 15min'
     },
     {
       id: 'gel-polish',
@@ -62,10 +62,10 @@ const Services: React.FC = () => {
         en: 'Long-lasting, chip-resistant gel polish application.',
         es: 'Aplicación de esmalte en gel de larga duración y resistente a desportillados.'
       },
-      price: 30,
-      image: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7',
+      price: 45,
+      image: 'public/images/service3.jpg',
       category: 'gel',
-      duration: '45min'
+      duration: '1h45min'
     },
     {
       id: 'nail-art',
@@ -77,38 +77,38 @@ const Services: React.FC = () => {
         en: 'Hand-painted designs customized to your preferences.',
         es: 'Diseños pintados a mano personalizados según tus preferencias.'
       },
-      price: 15,
-      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158',
+      price: 60,
+      image: 'public/images/service4.jpg',
       category: 'nailArt',
-      duration: '20min'
+      duration: '2h15min'
     },
     {
       id: 'hand-spa',
       name: {
-        en: 'Luxury Hand Spa',
-        es: 'Spa de Manos de Lujo'
+        en: 'Russian short nail manicure',
+        es: 'Manicura rusa uña corta'
       },
       description: {
-        en: 'Rejuvenating hand treatment with massage and premium products.',
-        es: 'Tratamiento rejuvenecedor para manos con masaje y productos premium.'
+        en: 'It is a dry manicure. Cuticle cuticle perfect with scissors. Semi-permanent enamel with leveling. This allows the nails to keep in perfect condition for longer without breaking.',
+        es: 'Es una manicura en seco. Corte de cutícula perfecto con tijeras. Esmaltado semi-permanente con nivelación. Esto permite que las uñas se mantengan en perfecto estado por más tiempo sin romperse.'
       },
       price: 45,
-      image: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7',
+      image: 'public/images/service5.jpg',
       category: 'handSpa',
-      duration: '50min'
+      duration: '1h45min'
     },
     {
       id: 'foot-spa',
       name: {
-        en: 'Luxury Foot Spa',
-        es: 'Spa de Pies de Lujo'
+        en: 'Complete Unglazed Pedicure',
+        es: 'Pedicura Completa Sin Esmaltar'
       },
       description: {
-        en: 'Complete foot rejuvenation with hot stones and aromatherapy.',
-        es: 'Rejuvenecimiento completo de pies con piedras calientes y aromaterapia.'
+        en: 'Russian cleansing, durics + hydration and massage.',
+        es: 'Limpieza Rusa, duricias + hidratacióny masaje.'
       },
       price: 55,
-      image: 'https://images.unsplash.com/photo-1721322800607-8c38375eef04',
+      image: 'public/images/service6.jpg',
       category: 'footSpa',
       duration: '60min'
     }

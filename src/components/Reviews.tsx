@@ -7,7 +7,7 @@ import { Star, ExternalLink } from 'lucide-react';
 const Reviews: React.FC = () => {
   const { t, language } = useLanguage();
 
-  const googleMapsUrl = "https://g.page/r/YOUR_GOOGLE_MAPS_PLACE_ID/review";
+  const googleMapsUrl = "https://g.co/kgs/2EExTu8";
 
   return (
     <section id="reviews" className="py-16 bg-background">

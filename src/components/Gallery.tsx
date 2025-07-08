@@ -8,37 +8,37 @@ const Gallery: React.FC = () => {
   // Gallery images - updated to WebP format with proper sizing
   const images = [
     {
-      src: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&w=800&q=75&fm=webp',
+      src: 'public/images/service1.jpg',
       alt: 'Nail design example 1',
       width: 800,
       height: 600,
     },
     {
-      src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&w=800&q=75&fm=webp',
+      src: 'public/images/service2.jpg',
       alt: 'Nail design example 2',
       width: 800,
       height: 600,
     },
     {
-      src: 'https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&w=800&q=75&fm=webp',
+      src: 'public/images/service3.jpg',
       alt: 'Nail design example 3',
       width: 800,
       height: 600,
     },
     {
-      src: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&w=800&q=75&fm=webp',
+      src: 'public/images/service4.jpg',
       alt: 'Nail design example 4',
       width: 800,
       height: 600,
     },
     {
-      src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&w=800&q=75&fm=webp',
+      src: 'public/images/service5.jpg',
       alt: 'Nail design example 5',
       width: 800,
       height: 600,
     },
     {
-      src: 'https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&w=800&q=75&fm=webp',
+      src: 'public/images/service6.jpg',
       alt: 'Nail design example 6',
       width: 800,
       height: 600,
