@@ -33,7 +33,7 @@ const Services: React.FC = () => {
         es: 'Cuidado completo de uñas con tratamiento de cutículas, moldeado y esmalte.'
       },
       price: 25,
-      image: 'public/images/service1.jpg',
+      image: '/images/service1.jpg',
       category: 'manicure',
       duration: '30min'
     },
@@ -48,7 +48,7 @@ const Services: React.FC = () => {
         es: 'Tratamiento relajante para pies que incluye remojo, exfoliación y esmalte.'
       },
       price: 50,
-      image: 'public/images/service2.jpg',
+      image: '/images/service2.jpg',
       category: 'pedicure complet',
       duration: '1h 15min'
     },
@@ -63,7 +63,7 @@ const Services: React.FC = () => {
         es: 'Aplicación de esmalte en gel de larga duración y resistente a desportillados.'
       },
       price: 45,
-      image: 'public/images/service3.jpg',
+      image: '/images/service3.jpg',
       category: 'gel',
       duration: '1h45min'
     },
@@ -78,7 +78,7 @@ const Services: React.FC = () => {
         es: 'Diseños pintados a mano personalizados según tus preferencias.'
       },
       price: 60,
-      image: 'public/images/service4.jpg',
+      image: '/images/service4.jpg',
       category: 'nailArt',
       duration: '2h15min'
     },
@@ -93,7 +93,7 @@ const Services: React.FC = () => {
         es: 'Es una manicura en seco. Corte de cutícula perfecto con tijeras. Esmaltado semi-permanente con nivelación. Esto permite que las uñas se mantengan en perfecto estado por más tiempo sin romperse.'
       },
       price: 45,
-      image: 'public/images/service5.jpg',
+      image: '/images/service5.jpg',
       category: 'handSpa',
       duration: '1h45min'
     },
@@ -108,7 +108,7 @@ const Services: React.FC = () => {
         es: 'Limpieza Rusa, duricias + hidratacióny masaje.'
       },
       price: 55,
-      image: 'public/images/service6.jpg',
+      image: '/images/service6.jpg',
       category: 'footSpa',
       duration: '60min'
     }

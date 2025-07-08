@@ -23,14 +23,14 @@ const About: React.FC = () => {
             <div className="grid grid-cols-2 gap-4">
               <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
                 <img 
-                  src="public/images/about1.jpg" 
+                  src="/images/about1.jpg" 
                   alt="Palmera Estudio Interior" 
                   className="object-cover h-full w-full"
                 />
               </div>
               <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
                 <img 
-                  src="public/images/about2.jpg" 
+                  src="/images/about2.jpg" 
                   alt="Nail Art Detail" 
                   className="object-cover h-full w-full"
                 />

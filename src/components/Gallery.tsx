@@ -8,37 +8,37 @@ const Gallery: React.FC = () => {
   // Gallery images - updated to WebP format with proper sizing
   const images = [
     {
-      src: 'public/images/service1.jpg',
+      src: '/images/service1.jpg',
       alt: 'Nail design example 1',
       width: 800,
       height: 600,
     },
     {
-      src: 'public/images/service2.jpg',
+      src: '/images/service2.jpg',
       alt: 'Nail design example 2',
       width: 800,
       height: 600,
     },
     {
-      src: 'public/images/service3.jpg',
+      src: '/images/service3.jpg',
       alt: 'Nail design example 3',
       width: 800,
       height: 600,
     },
     {
-      src: 'public/images/service4.jpg',
+      src: '/images/service4.jpg',
       alt: 'Nail design example 4',
       width: 800,
       height: 600,
     },
     {
-      src: 'public/images/service5.jpg',
+      src: '/images/service5.jpg',
       alt: 'Nail design example 5',
       width: 800,
       height: 600,
     },
     {
-      src: 'public/images/service6.jpg',
+      src: '/images/service6.jpg',
       alt: 'Nail design example 6',
       width: 800,
       height: 600,
