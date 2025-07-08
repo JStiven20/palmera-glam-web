@@ -6,6 +6,7 @@ import About from '../components/About';
 import Services from '../components/Services';
 import Booking from '../components/Booking';
 import Gallery from '../components/Gallery';
+import Reviews from '../components/Reviews';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
@@ -48,6 +49,7 @@ const Index: React.FC = () => {
             <Services />
             <Booking />
             <Gallery />
+            <Reviews />
             <Contact />
           </main>
           <Footer />
