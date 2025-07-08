@@ -16,7 +16,7 @@ const Hero: React.FC = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{ 
-          backgroundImage: "url('public/images/banner.jpg')", 
+          backgroundImage: "url('public/images/banner.webp')", 
         }}
       ></div>
       
