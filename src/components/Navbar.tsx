@@ -1,5 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Navbar: React.FC = () => {
@@ -7,16 +7,12 @@ const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Change navbar style on scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const toggleLanguage = () => {
@@ -24,18 +20,46 @@ const Navbar: React.FC = () => {
   };
 
   const navLinks = [
-    { href: '#home', label: t('nav.home') },
-    { href: '#about', label: t('nav.services') },
-    { href: '#booking', label: t('nav.booking') },
-    { href: '#gallery', label: t('nav.gallery') },
-    { href: '#contact', label: t('nav.contact') },
+    { to: '/', label: t('nav.home') },
+    { to: '/services', label: t('nav.services') }, // nueva página
+    { to: '#booking', label: t('nav.booking') },
+    { to: '#gallery', label: t('nav.gallery') },
+    { to: '#contact', label: t('nav.contact') },
   ];
 
+  const renderLink = (link: { to: string; label: string }, isMobile: boolean = false) => {
+    const classes = isMobile
+      ? "block py-2 text-center hover:text-palmera-olive"
+      : "text-sm hover:text-palmera-olive transition-colors duration-300";
+
+    if (link.to.startsWith('/')) {
+      return (
+        <Link
+          to={link.to}
+          className={classes}
+          onClick={() => isMobile && setIsMobileMenuOpen(false)}
+        >
+          {link.label}
+        </Link>
+      );
+    } else {
+      return (
+        <a
+          href={link.to}
+          className={classes}
+          onClick={() => isMobile && setIsMobileMenuOpen(false)}
+        >
+          {link.label}
+        </a>
+      );
+    }
+  };
+
   return (
-    <header 
+    <header
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white bg-opacity-90 backdrop-blur-sm shadow-sm py-2' 
+        isScrolled
+          ? 'bg-white bg-opacity-90 backdrop-blur-sm shadow-sm py-2'
           : 'bg-transparent py-6'
       }`}
     >
@@ -49,18 +73,11 @@ const Navbar: React.FC = () => {
         <nav className="hidden md:flex items-center space-x-6">
           <ul className="flex space-x-6">
             {navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="text-sm hover:text-palmera-olive transition-colors duration-300"
-                >
-                  {link.label}
-                </a>
-              </li>
+              <li key={link.to}>{renderLink(link)}</li>
             ))}
           </ul>
-          
-          <button 
+
+          <button
             onClick={toggleLanguage}
             className="ml-4 px-2 py-1 text-sm border border-palmera-olive text-palmera-olive rounded hover:bg-palmera-olive hover:text-white transition-colors duration-300"
           >
@@ -75,16 +92,16 @@ const Navbar: React.FC = () => {
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             {isMobileMenuOpen ? (
-              <g>
+              <>
                 <path d="M18 6L6 18"></path>
                 <path d="M6 6L18 18"></path>
-              </g>
+              </>
             ) : (
-              <g>
+              <>
                 <path d="M3 12h18"></path>
                 <path d="M3 6h18"></path>
                 <path d="M3 18h18"></path>
-              </g>
+              </>
             )}
           </svg>
         </button>
@@ -95,18 +112,10 @@ const Navbar: React.FC = () => {
         <nav className="md:hidden bg-white py-4 shadow-md">
           <ul className="flex flex-col space-y-4 px-6">
             {navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="block py-2 text-center hover:text-palmera-olive"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
-              </li>
+              <li key={link.to}>{renderLink(link, true)}</li>
             ))}
             <li>
-              <button 
+              <button
                 onClick={toggleLanguage}
                 className="w-full py-2 mt-2 text-palmera-olive border border-palmera-olive rounded hover:bg-palmera-olive hover:text-white transition-colors duration-300"
               >

@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Suspense, lazy, useEffect } from "react";
 import Index from "./pages/Index";
+import ServicesPage from "./pages/Services";
 import NotFound from "./pages/NotFound";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import CookieConsent from "./components/CookieConsent";
@@ -70,6 +71,7 @@ const App = () => {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/services" element={<ServicesPage />} />
               <Route path="/privacy-policy" element={
                 <Suspense fallback={<div className="flex h-screen items-center justify-center">Loading...</div>}>
                   <PrivacyPolicy />

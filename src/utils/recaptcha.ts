@@ -10,7 +10,7 @@ declare global {
 }
 
 // Replace with your actual reCAPTCHA site key
-const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'; // This is a test key
+const RECAPTCHA_SITE_KEY = '6LeWjH0rAAAAAJ_3RQ3raRIQ38hkrOra8bJWKipa'; // This is a test key
 
 export const loadRecaptcha = (): Promise<void> => {
   return new Promise((resolve) => {
