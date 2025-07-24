@@ -8,7 +8,9 @@ import { Suspense, lazy, useEffect } from "react";
 import Index from "./pages/Index";
 import ServicesPage from "./pages/Services";
 import NotFound from "./pages/NotFound";
+import AdminPanel from "./components/AdminPanel";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { DatabaseProvider } from "./contexts/DatabaseContext";
 import CookieConsent from "./components/CookieConsent";
 
 // Lazy load non-critical routes
@@ -66,27 +68,30 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <LanguageProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/privacy-policy" element={
-                <Suspense fallback={<div className="flex h-screen items-center justify-center">Loading...</div>}>
-                  <PrivacyPolicy />
-                </Suspense>
-              } />
-              <Route path="/cookie-policy" element={
-                <Suspense fallback={<div className="flex h-screen items-center justify-center">Loading...</div>}>
-                  <CookiePolicy />
-                </Suspense>
-              } />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <CookieConsent />
-          </BrowserRouter>
+          <DatabaseProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/services" element={<ServicesPage />} />
+                <Route path="/admin" element={<AdminPanel />} />
+                <Route path="/privacy-policy" element={
+                  <Suspense fallback={<div className="flex h-screen items-center justify-center">Loading...</div>}>
+                    <PrivacyPolicy />
+                  </Suspense>
+                } />
+                <Route path="/cookie-policy" element={
+                  <Suspense fallback={<div className="flex h-screen items-center justify-center">Loading...</div>}>
+                    <CookiePolicy />
+                  </Suspense>
+                } />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              <CookieConsent />
+            </BrowserRouter>
+          </DatabaseProvider>
         </LanguageProvider>
       </TooltipProvider>
     </QueryClientProvider>

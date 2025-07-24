@@ -6,7 +6,6 @@ import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
 import { LanguageProvider } from '../contexts/LanguageContext';
-import { DatabaseProvider } from '../contexts/DatabaseContext';
 
 const ServicesPage: React.FC = () => {
   // Animation on scroll effect
@@ -34,19 +33,15 @@ const ServicesPage: React.FC = () => {
   }, []);
   
   return (
-    <LanguageProvider>
-      <DatabaseProvider>
-        <div className="min-h-screen">
-          <Navbar />
-          <main>
-            <Services />
-            <Contact />
-          </main>
-          <Footer />
-          <WhatsAppButton />
-        </div>
-      </DatabaseProvider>
-    </LanguageProvider>
+    <div className="min-h-screen">
+      <Navbar />
+      <main>
+        <Services />
+        <Contact />
+      </main>
+      <Footer />
+      <WhatsAppButton />
+    </div>
   );
 };
 

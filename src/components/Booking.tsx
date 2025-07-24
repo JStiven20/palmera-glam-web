@@ -1,10 +1,12 @@
 
 import React, { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useDatabase } from '../contexts/DatabaseContext';
 import { toast } from '@/hooks/use-toast';
 
 const Booking: React.FC = () => {
   const { t, language } = useLanguage();
+  const { addClient, addVisit } = useDatabase();
   const [showBooksy, setShowBooksy] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -58,14 +60,29 @@ const Booking: React.FC = () => {
     
     setIsSubmitting(true);
     
-    // Simulate booking submission
-    setTimeout(() => {
+    try {
+      // Add client to database
+      const newClient = addClient({
+        name: sanitizedData.name,
+        email: sanitizedData.email,
+        phone: sanitizedData.phone,
+      });
+      
+      // Add visit/appointment to client
+      const clientId = `client-${Date.now()}`;
+      addVisit(clientId, {
+        date: `${sanitizedData.date}T${sanitizedData.time}`,
+        service: sanitizedData.service,
+        price: 0, // Price will be set later
+        notes: sanitizedData.notes || undefined,
+      });
+      
       // Show success message
       toast({
-        title: language === 'es' ? '¡Reserva enviada!' : 'Booking submitted!',
+        title: language === 'es' ? '¡Reserva guardada!' : 'Booking saved!',
         description: language === 'es' 
-          ? 'Te contactaremos pronto para confirmar tu cita.' 
-          : 'We\'ll contact you soon to confirm your appointment.',
+          ? 'Tu cita ha sido guardada. Te contactaremos pronto para confirmar.' 
+          : 'Your appointment has been saved. We\'ll contact you soon to confirm.',
         duration: 5000,
       });
       
@@ -80,8 +97,18 @@ const Booking: React.FC = () => {
         notes: ''
       });
       
+    } catch (error) {
+      toast({
+        title: language === 'es' ? 'Error' : 'Error',
+        description: language === 'es' 
+          ? 'Hubo un problema al guardar la reserva.' 
+          : 'There was a problem saving the booking.',
+        variant: 'destructive',
+        duration: 3000,
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (

@@ -11,7 +11,6 @@ import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
 import { LanguageProvider } from '../contexts/LanguageContext';
-import { DatabaseProvider } from '../contexts/DatabaseContext';
 
 const Index: React.FC = () => {
   // Animation on scroll effect
@@ -39,24 +38,20 @@ const Index: React.FC = () => {
   }, []);
   
   return (
-    <LanguageProvider>
-      <DatabaseProvider>
-        <div className="min-h-screen">
-          <Navbar />
-          <main>
-            <Hero />
-            <About />
-            <Services />
-            <Booking />
-            <Gallery />
-            <Reviews />
-            <Contact />
-          </main>
-          <Footer />
-          <WhatsAppButton />
-        </div>
-      </DatabaseProvider>
-    </LanguageProvider>
+    <div className="min-h-screen">
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Services />
+        <Booking />
+        <Gallery />
+        <Reviews />
+        <Contact />
+      </main>
+      <Footer />
+      <WhatsAppButton />
+    </div>
   );
 };
 

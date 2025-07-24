@@ -1,5 +1,6 @@
 
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { dbService } from '../services/firebase';
 
 // Client type definition
 export interface Visit {
@@ -60,14 +61,24 @@ export const DatabaseProvider: React.FC<{ children: ReactNode }> = ({ children }
   }, [clients]);
 
   // Add a new client
-  const addClient = (client: Omit<Client, 'id' | 'visits' | 'createdAt'>) => {
-    const newClient: Client = {
-      ...client,
-      id: `client-${Date.now()}`,
-      visits: [],
-      createdAt: new Date().toISOString(),
-    };
-    setClients([...clients, newClient]);
+  const addClient = async (client: Omit<Client, 'id' | 'visits' | 'createdAt'>) => {
+    try {
+      // Use Firebase service (currently localStorage fallback)
+      const clientId = await dbService.addClient(client);
+      
+      // Update local state
+      const newClient: Client = {
+        ...client,
+        id: clientId,
+        visits: [],
+        createdAt: new Date().toISOString(),
+      };
+      setClients([...clients, newClient]);
+      return newClient;
+    } catch (error) {
+      console.error('Failed to add client:', error);
+      throw error;
+    }
   };
 
   // Update client information
