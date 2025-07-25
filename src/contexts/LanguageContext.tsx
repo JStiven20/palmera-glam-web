@@ -32,6 +32,10 @@ const translations: Record<string, Record<Language, string>> = {
     en: 'Contact',
     es: 'Contacto'
   },
+  'nav.training': {
+    en: 'Training',
+    es: 'Formaciones'
+  },
   // Hero section
   'hero.welcome': {
     en: 'Welcome to',
@@ -239,6 +243,67 @@ const translations: Record<string, Record<Language, string>> = {
   'whatsapp.message': {
     en: 'Chat with us',
     es: 'Chatea con nosotros'
+  },
+  // Training page
+  'training.title': {
+    en: 'Professional Training',
+    es: 'Formaciones Profesionales'
+  },
+  'training.subtitle': {
+    en: 'Become a nail art expert with our professional courses',
+    es: 'Conviértete en experto en nail art con nuestros cursos profesionales'
+  },
+  'training.duration': {
+    en: 'Duration',
+    es: 'Duración'
+  },
+  'training.level': {
+    en: 'Level',
+    es: 'Nivel'
+  },
+  'training.price': {
+    en: 'Price',
+    es: 'Precio'
+  },
+  'training.includes': {
+    en: 'Includes',
+    es: 'Incluye'
+  },
+  'training.beginner': {
+    en: 'Beginner',
+    es: 'Principiante'
+  },
+  'training.intermediate': {
+    en: 'Intermediate',
+    es: 'Intermedio'
+  },
+  'training.advanced': {
+    en: 'Advanced',
+    es: 'Avanzado'
+  },
+  'training.hours': {
+    en: 'hours',
+    es: 'horas'
+  },
+  'training.certificate': {
+    en: 'Certificate included',
+    es: 'Certificado incluido'
+  },
+  'training.materials': {
+    en: 'Materials included',
+    es: 'Materiales incluidos'
+  },
+  'training.practice': {
+    en: 'Practical sessions',
+    es: 'Sesiones prácticas'
+  },
+  'training.enroll': {
+    en: 'Enroll Now',
+    es: 'Inscribirse Ahora'
+  },
+  'training.contact': {
+    en: 'Contact for Details',
+    es: 'Contactar para Detalles'
   }
 };
 

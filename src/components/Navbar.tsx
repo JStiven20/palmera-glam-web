@@ -21,7 +21,8 @@ const Navbar: React.FC = () => {
 
   const navLinks = [
     { to: '/', label: t('nav.home') },
-    { to: '/services', label: t('nav.services') }, // nueva página
+    { to: '/services', label: t('nav.services') },
+    { to: '/training', label: t('nav.training') },
     { to: '#booking', label: t('nav.booking') },
     { to: '#gallery', label: t('nav.gallery') },
     { to: '#contact', label: t('nav.contact') },

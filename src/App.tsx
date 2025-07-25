@@ -4,9 +4,11 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from 'react-helmet-async';
 import { Suspense, lazy, useEffect } from "react";
 import Index from "./pages/Index";
 import ServicesPage from "./pages/Services";
+import Training from "./pages/Training";
 import NotFound from "./pages/NotFound";
 import AdminPanel from "./components/AdminPanel";
 import { LanguageProvider } from "./contexts/LanguageContext";
@@ -65,16 +67,18 @@ const App = () => {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <LanguageProvider>
-          <DatabaseProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <LanguageProvider>
+            <DatabaseProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/services" element={<ServicesPage />} />
+                <Route path="/training" element={<Training />} />
                 <Route path="/admin" element={<AdminPanel />} />
                 <Route path="/privacy-policy" element={
                   <Suspense fallback={<div className="flex h-screen items-center justify-center">Loading...</div>}>
@@ -95,6 +99,7 @@ const App = () => {
         </LanguageProvider>
       </TooltipProvider>
     </QueryClientProvider>
+  </HelmetProvider>
   );
 };
 
