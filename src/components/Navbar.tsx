@@ -28,6 +28,10 @@ const Navbar: React.FC = () => {
     { to: '#contact', label: t('nav.contact') },
   ];
 
+  const authLinks = [
+    { to: '/auth', label: 'Mi Cuenta', className: 'bg-palmera-olive text-white px-4 py-2 rounded-md hover:bg-opacity-90 transition-colors' },
+  ];
+
   const renderLink = (link: { to: string; label: string }, isMobile: boolean = false) => {
     const classes = isMobile
       ? "block py-2 text-center hover:text-palmera-olive"
@@ -78,12 +82,24 @@ const Navbar: React.FC = () => {
             ))}
           </ul>
 
-          <button
-            onClick={toggleLanguage}
-            className="ml-4 px-2 py-1 text-sm border border-palmera-olive text-palmera-olive rounded hover:bg-palmera-olive hover:text-white transition-colors duration-300"
-          >
-            {language === 'es' ? 'EN' : 'ES'}
-          </button>
+          <div className="flex items-center space-x-4 ml-4">
+            <button
+              onClick={toggleLanguage}
+              className="px-2 py-1 text-sm border border-palmera-olive text-palmera-olive rounded hover:bg-palmera-olive hover:text-white transition-colors duration-300"
+            >
+              {language === 'es' ? 'EN' : 'ES'}
+            </button>
+            
+            {authLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={link.className}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
         </nav>
 
         {/* Mobile Navigation Toggle */}
@@ -114,6 +130,17 @@ const Navbar: React.FC = () => {
           <ul className="flex flex-col space-y-4 px-6">
             {navLinks.map((link) => (
               <li key={link.to}>{renderLink(link, true)}</li>
+            ))}
+            {authLinks.map((link) => (
+              <li key={link.to}>
+                <Link
+                  to={link.to}
+                  className="block py-2 text-center bg-palmera-olive text-white rounded hover:bg-opacity-90"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              </li>
             ))}
             <li>
               <button

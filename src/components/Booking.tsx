@@ -146,21 +146,45 @@ const Booking: React.FC = () => {
           
           <div className="bg-white rounded-lg shadow-lg p-6">
             {showBooksy ? (
-              <div className="aspect-w-16 aspect-h-9">
-                {/* Placeholder for Booksy iframe */}
-                <div className="booking-iframe flex items-center justify-center bg-gray-100 p-10 text-center">
-                  <div>
-                    <p className="text-lg mb-4"></p>
-                    <p className="text-gray-500 mb-6"></p>
-                    <a 
-                      href="https://booksy.com/es-es/98089_tamar-rivera-nails_salon-de-unas_48863_barcelona?do=invite&_branch_match_id=1471238438340173835&utm_medium=profile_share_from_profile&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXT07J0UvKz88urtRLzs%2FVz8ywKC0pKwoN802yrytKTUstKsrMS49PKsovL04tsnXOKMrPTQUA1ZJaCzwAAAA%3D" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="inline-block bg-palmera-olive text-white px-6 py-2 rounded"
-                    >
-                      {t('booking.booksy')}
-                    </a>
+              <div className="bg-gradient-to-br from-palmera-olive/5 to-palmera-olive/10 rounded-lg p-8 border border-palmera-olive/20">
+                <div className="text-center">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-palmera-olive rounded-full mb-4">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
                   </div>
+                  <h3 className="text-2xl font-playfair font-bold mb-4 text-palmera-olive">¡Reserva tu Cita!</h3>
+                  <p className="text-gray-700 mb-6 leading-relaxed">
+                    Usa nuestra plataforma de reservas online <strong>Booksy</strong> para seleccionar tu cita de forma rápida, sencilla y segura.
+                  </p>
+                  <div className="space-y-2 mb-6">
+                    <div className="flex items-center justify-center text-sm text-gray-600">
+                      <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Disponibilidad en tiempo real
+                    </div>
+                    <div className="flex items-center justify-center text-sm text-gray-600">
+                      <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Confirmación inmediata
+                    </div>
+                    <div className="flex items-center justify-center text-sm text-gray-600">
+                      <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Recordatorios automáticos
+                    </div>
+                  </div>
+                  <a 
+                    href="https://booksy.com/es-es/98089_tamar-rivera-nails_salon-de-unas_48863_barcelona?do=invite&_branch_match_id=1471238438340173835&utm_medium=profile_share_from_profile&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXT07J0UvKz88urtRLzs%2FVz8ywKC0pKwoN802yrytKTUstKsrMS49PKsovL04tsnXOKMrPTQUA1ZJaCzwAAAA%3D" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-block bg-gradient-to-r from-palmera-olive to-palmera-olive/80 text-white px-8 py-4 rounded-full hover:from-palmera-olive/90 hover:to-palmera-olive/70 transition-all duration-300 transform hover:scale-105 font-semibold text-lg shadow-lg hover:shadow-xl"
+                  >
+                    🗓️ Reservar Ahora en Booksy
+                  </a>
                 </div>
               </div>
             ) : (

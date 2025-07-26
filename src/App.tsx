@@ -9,6 +9,7 @@ import { Suspense, lazy, useEffect } from "react";
 import Index from "./pages/Index";
 import ServicesPage from "./pages/Services";
 import Training from "./pages/Training";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import AdminPanel from "./components/AdminPanel";
 import { LanguageProvider } from "./contexts/LanguageContext";
@@ -79,6 +80,7 @@ const App = () => {
                 <Route path="/" element={<Index />} />
                 <Route path="/services" element={<ServicesPage />} />
                 <Route path="/training" element={<Training />} />
+                <Route path="/auth" element={<Auth />} />
                 <Route path="/admin" element={<AdminPanel />} />
                 <Route path="/privacy-policy" element={
                   <Suspense fallback={<div className="flex h-screen items-center justify-center">Loading...</div>}>

@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,8 +15,8 @@ import {
 } from '@/components/ui/form';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { toast } from '@/hooks/use-toast';
-import { verifyRecaptcha } from '@/utils/recaptcha';
+import { toast } from 'sonner';
+import { supabase } from '@/integrations/supabase/client';
 
 // Define the form schema
 const formSchema = z.object({
@@ -33,6 +33,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 const ContactForm = () => {
   const { t, language } = useLanguage();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -45,52 +46,42 @@ const ContactForm = () => {
   });
 
   const onSubmit = async (data: FormValues) => {
-    // Verify reCAPTCHA
+    setIsSubmitting(true);
+    
     try {
-      const isVerified = await verifyRecaptcha();
-      
-      if (!isVerified) {
-        toast({
-          title: language === 'es' ? 'Error de verificación' : 'Verification Error',
-          description: language === 'es' 
-            ? 'Por favor, verifica que eres humano.' 
-            : 'Please verify that you are a human.',
-          variant: 'destructive',
+      // Save to Supabase
+      const { error } = await supabase
+        .from('contacts')
+        .insert({
+          name: data.name,
+          email: data.email,
+          phone: data.phone || null,
+          message: data.message,
         });
+
+      if (error) {
+        console.error('Supabase error:', error);
+        toast.error(language === 'es' 
+          ? 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.' 
+          : 'Error sending message. Please try again.');
         return;
       }
 
-      // Form submission logic
-      console.log('Form data:', data);
-      
-      // In a real application, you would send the data to your backend here
-      // await submitContactForm(data);
-      
       // Show success message
-      toast({
-        title: language === 'es' ? '¡Mensaje enviado!' : 'Message Sent!',
-        description: language === 'es' 
-          ? 'Gracias por contactarnos. Te responderemos pronto.' 
-          : 'Thank you for contacting us. We will respond shortly.',
-        duration: 5000,
-      });
+      toast.success(language === 'es' 
+        ? '¡Mensaje enviado! Gracias por contactarnos. Te responderemos pronto.' 
+        : 'Message sent! Thank you for contacting us. We will respond shortly.');
       
       // Reset form
       form.reset();
       
-      // Track lead event (uncomment when Meta Pixel is set up)
-      // import { trackLead } from '../utils/metaEvents';
-      // trackLead('contact', 'form');
-      
     } catch (error) {
       console.error('Contact form error:', error);
-      toast({
-        title: language === 'es' ? 'Error' : 'Error',
-        description: language === 'es' 
-          ? 'Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo.' 
-          : 'There was an error sending your message. Please try again.',
-        variant: 'destructive',
-      });
+      toast.error(language === 'es' 
+        ? 'Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo.' 
+        : 'There was an error sending your message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -181,13 +172,12 @@ const ContactForm = () => {
             )}
           />
           
-          <div id="recaptcha" className="g-recaptcha mb-4"></div>
-          
           <button 
             type="submit" 
-            className="w-full py-3 bg-palmera-olive text-white font-medium rounded-md hover:bg-opacity-90 transition-colors"
+            disabled={isSubmitting}
+            className="w-full py-3 bg-palmera-olive text-white font-medium rounded-md hover:bg-opacity-90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {t('contact.send')}
+            {isSubmitting ? (language === 'es' ? 'Enviando...' : 'Sending...') : t('contact.send')}
           </button>
         </form>
       </Form>
